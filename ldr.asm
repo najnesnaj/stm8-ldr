@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.4.0 #8981 (Jul 11 2014) (Linux)
-; This file was generated Fri Sep  8 10:58:49 2017
+; Version 3.4.0 #8981 (Jul  5 2014) (Linux)
+; This file was generated Sun Sep 10 20:11:45 2017
 ;--------------------------------------------------------
 	.module ldr
 	.optsdcc -mstm8
@@ -425,60 +425,60 @@ _main:
 	call	_InitializeSystemClock
 ;	ldr.c: 137: InitializeUART();
 	call	_InitializeUART
-;	ldr.c: 141: PD_DDR |= (1<<4);
+;	ldr.c: 141: PD_DDR |= (1<<2);
 	ldw	x, #0x5011
 	ld	a, (x)
-	or	a, #0x10
+	or	a, #0x04
 	ld	(x), a
-;	ldr.c: 142: PD_CR1 |= (1<<4);
+;	ldr.c: 142: PD_CR1 |= (1<<2);
 	ldw	x, #0x5012
 	ld	a, (x)
-	or	a, #0x10
+	or	a, #0x04
 	ld	(x), a
-;	ldr.c: 143: PD_CR2 |= (1<<4);
+;	ldr.c: 143: PD_CR2 |= (1<<2);
 	ldw	x, #0x5013
 	ld	a, (x)
-	or	a, #0x10
+	or	a, #0x04
 	ld	(x), a
-;	ldr.c: 144: while (1) {
+;	ldr.c: 145: while (1) {
 00108$:
-;	ldr.c: 147: ampere=0;
+;	ldr.c: 148: ampere=0;
 	clrw	x
-	ldw	(0x05, sp), x
-;	ldr.c: 149: ADC_CSR |= ((0x0F)&4); // select channel = 4 = PD3
+	ldw	(0x03, sp), x
+;	ldr.c: 150: ADC_CSR |= ((0x0F)&4); // select channel = 4 = PD3
 	ldw	x, #0x5400
 	ld	a, (x)
 	or	a, #0x04
 	ld	(x), a
-;	ldr.c: 150: ADC_CR2 |= ADC_ALIGN; // Right Aligned Data
+;	ldr.c: 151: ADC_CR2 |= ADC_ALIGN; // Right Aligned Data
 	ldw	x, #0x5402
 	ld	a, (x)
 	or	a, #0x08
 	ld	(x), a
-;	ldr.c: 151: ADC_CR1 |= ADC_ADON; // ADC ON
+;	ldr.c: 152: ADC_CR1 |= ADC_ADON; // ADC ON
 	bset	0x5401, #0
-;	ldr.c: 152: ADC_CR1 |= ADC_ADON; // start conversion 
+;	ldr.c: 153: ADC_CR1 |= ADC_ADON; // start conversion 
 	bset	0x5401, #0
-;	ldr.c: 153: while(((ADC_CSR)&(1<<7))== 0); // Wait till EOC
+;	ldr.c: 154: while(((ADC_CSR)&(1<<7))== 0); // Wait till EOC
 00101$:
 	ldw	x, #0x5400
 	ld	a, (x)
 	sll	a
 	jrnc	00101$
-;	ldr.c: 155: ampere |= (unsigned int)ADC_DRL;
+;	ldr.c: 156: ampere |= (unsigned int)ADC_DRL;
 	ldw	x, #0x5405
 	ld	a, (x)
 	rlwa	x
 	clr	a
 	rrwa	x
-	ldw	y, (0x05, sp)
+	ldw	y, (0x03, sp)
 	ldw	(0x01, sp), y
 	or	a, (0x02, sp)
 	ld	yl, a
 	ld	a, xh
 	or	a, (0x01, sp)
 	ld	yh, a
-;	ldr.c: 156: ampere |= (unsigned int)ADC_DRH<<8;
+;	ldr.c: 157: ampere |= (unsigned int)ADC_DRH<<8;
 	ldw	x, #0x5404
 	ld	a, (x)
 	clrw	x
@@ -491,40 +491,40 @@ _main:
 	sllw	x
 	sllw	x
 	sllw	x
-	ldw	(0x03, sp), y
+	ldw	(0x05, sp), y
 	ld	a, xl
-	or	a, (0x04, sp)
+	or	a, (0x06, sp)
 	ld	yl, a
 	ld	a, xh
-	or	a, (0x03, sp)
+	or	a, (0x05, sp)
 	ld	yh, a
-;	ldr.c: 158: ADC_CR1 &= ~(1<<0); // ADC Stop Conversion
+;	ldr.c: 159: ADC_CR1 &= ~(1<<0); // ADC Stop Conversion
 	ldw	x, #0x5401
 	ld	a, (x)
 	and	a, #0xfe
 	ld	(x), a
-;	ldr.c: 159: ampere &= 0x03ff; // 0 bits resolution so above 0x0400 is nothing
+;	ldr.c: 160: ampere &= 0x03ff; // 0 bits resolution so above 0x0400 is nothing
 	ld	a, yh
 	and	a, #0x03
 	ld	yh, a
-;	ldr.c: 162: PD_ODR |= (1<<4);
+;	ldr.c: 163: PD_ODR |= (1<<2);
 	ldw	x, #0x500f
 	ld	a, (x)
-;	ldr.c: 160: if (ampere > 0xff) //lights are on
-	cpw	y, #0x00ff
+;	ldr.c: 161: if (ampere > 0x2ff) //lights are on
+	cpw	y, #0x02ff
 	jrsle	00105$
-;	ldr.c: 162: PD_ODR |= (1<<4);
-	or	a, #0x10
+;	ldr.c: 163: PD_ODR |= (1<<2);
+	or	a, #0x04
 	ldw	x, #0x500f
 	ld	(x), a
 	jra	00106$
 00105$:
-;	ldr.c: 165: PD_ODR &= ~(1<<4);
-	and	a, #0xef
+;	ldr.c: 166: PD_ODR &= ~(1<<2);
+	and	a, #0xfb
 	ldw	x, #0x500f
 	ld	(x), a
 00106$:
-;	ldr.c: 167: delay(4000);
+;	ldr.c: 168: delay(4000);
 	push	#0xa0
 	push	#0x0f
 	call	_delay

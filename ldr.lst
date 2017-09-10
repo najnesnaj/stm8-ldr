@@ -1,7 +1,7 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 3.4.0 #8981 (Jul 11 2014) (Linux)
-                                      4 ; This file was generated Fri Sep  8 10:58:49 2017
+                                      3 ; Version 3.4.0 #8981 (Jul  5 2014) (Linux)
+                                      4 ; This file was generated Sun Sep 10 20:11:45 2017
                                       5 ;--------------------------------------------------------
                                       6 	.module ldr
                                       7 	.optsdcc -mstm8
@@ -425,60 +425,60 @@
       00017D CDr00r08         [ 4]  425 	call	_InitializeSystemClock
                                     426 ;	ldr.c: 137: InitializeUART();
       000180 CDr01r02         [ 4]  427 	call	_InitializeUART
-                                    428 ;	ldr.c: 141: PD_DDR |= (1<<4);
+                                    428 ;	ldr.c: 141: PD_DDR |= (1<<2);
       000183 AE 50 11         [ 2]  429 	ldw	x, #0x5011
       000186 F6               [ 1]  430 	ld	a, (x)
-      000187 AA 10            [ 1]  431 	or	a, #0x10
+      000187 AA 04            [ 1]  431 	or	a, #0x04
       000189 F7               [ 1]  432 	ld	(x), a
-                                    433 ;	ldr.c: 142: PD_CR1 |= (1<<4);
+                                    433 ;	ldr.c: 142: PD_CR1 |= (1<<2);
       00018A AE 50 12         [ 2]  434 	ldw	x, #0x5012
       00018D F6               [ 1]  435 	ld	a, (x)
-      00018E AA 10            [ 1]  436 	or	a, #0x10
+      00018E AA 04            [ 1]  436 	or	a, #0x04
       000190 F7               [ 1]  437 	ld	(x), a
-                                    438 ;	ldr.c: 143: PD_CR2 |= (1<<4);
+                                    438 ;	ldr.c: 143: PD_CR2 |= (1<<2);
       000191 AE 50 13         [ 2]  439 	ldw	x, #0x5013
       000194 F6               [ 1]  440 	ld	a, (x)
-      000195 AA 10            [ 1]  441 	or	a, #0x10
+      000195 AA 04            [ 1]  441 	or	a, #0x04
       000197 F7               [ 1]  442 	ld	(x), a
-                                    443 ;	ldr.c: 144: while (1) {
+                                    443 ;	ldr.c: 145: while (1) {
       000198                        444 00108$:
-                                    445 ;	ldr.c: 147: ampere=0;
+                                    445 ;	ldr.c: 148: ampere=0;
       000198 5F               [ 1]  446 	clrw	x
-      000199 1F 05            [ 2]  447 	ldw	(0x05, sp), x
-                                    448 ;	ldr.c: 149: ADC_CSR |= ((0x0F)&4); // select channel = 4 = PD3
+      000199 1F 03            [ 2]  447 	ldw	(0x03, sp), x
+                                    448 ;	ldr.c: 150: ADC_CSR |= ((0x0F)&4); // select channel = 4 = PD3
       00019B AE 54 00         [ 2]  449 	ldw	x, #0x5400
       00019E F6               [ 1]  450 	ld	a, (x)
       00019F AA 04            [ 1]  451 	or	a, #0x04
       0001A1 F7               [ 1]  452 	ld	(x), a
-                                    453 ;	ldr.c: 150: ADC_CR2 |= ADC_ALIGN; // Right Aligned Data
+                                    453 ;	ldr.c: 151: ADC_CR2 |= ADC_ALIGN; // Right Aligned Data
       0001A2 AE 54 02         [ 2]  454 	ldw	x, #0x5402
       0001A5 F6               [ 1]  455 	ld	a, (x)
       0001A6 AA 08            [ 1]  456 	or	a, #0x08
       0001A8 F7               [ 1]  457 	ld	(x), a
-                                    458 ;	ldr.c: 151: ADC_CR1 |= ADC_ADON; // ADC ON
+                                    458 ;	ldr.c: 152: ADC_CR1 |= ADC_ADON; // ADC ON
       0001A9 72 10 54 01      [ 1]  459 	bset	0x5401, #0
-                                    460 ;	ldr.c: 152: ADC_CR1 |= ADC_ADON; // start conversion 
+                                    460 ;	ldr.c: 153: ADC_CR1 |= ADC_ADON; // start conversion 
       0001AD 72 10 54 01      [ 1]  461 	bset	0x5401, #0
-                                    462 ;	ldr.c: 153: while(((ADC_CSR)&(1<<7))== 0); // Wait till EOC
+                                    462 ;	ldr.c: 154: while(((ADC_CSR)&(1<<7))== 0); // Wait till EOC
       0001B1                        463 00101$:
       0001B1 AE 54 00         [ 2]  464 	ldw	x, #0x5400
       0001B4 F6               [ 1]  465 	ld	a, (x)
       0001B5 48               [ 1]  466 	sll	a
       0001B6 24 F9            [ 1]  467 	jrnc	00101$
-                                    468 ;	ldr.c: 155: ampere |= (unsigned int)ADC_DRL;
+                                    468 ;	ldr.c: 156: ampere |= (unsigned int)ADC_DRL;
       0001B8 AE 54 05         [ 2]  469 	ldw	x, #0x5405
       0001BB F6               [ 1]  470 	ld	a, (x)
       0001BC 02               [ 1]  471 	rlwa	x
       0001BD 4F               [ 1]  472 	clr	a
       0001BE 01               [ 1]  473 	rrwa	x
-      0001BF 16 05            [ 2]  474 	ldw	y, (0x05, sp)
+      0001BF 16 03            [ 2]  474 	ldw	y, (0x03, sp)
       0001C1 17 01            [ 2]  475 	ldw	(0x01, sp), y
       0001C3 1A 02            [ 1]  476 	or	a, (0x02, sp)
       0001C5 90 97            [ 1]  477 	ld	yl, a
       0001C7 9E               [ 1]  478 	ld	a, xh
       0001C8 1A 01            [ 1]  479 	or	a, (0x01, sp)
       0001CA 90 95            [ 1]  480 	ld	yh, a
-                                    481 ;	ldr.c: 156: ampere |= (unsigned int)ADC_DRH<<8;
+                                    481 ;	ldr.c: 157: ampere |= (unsigned int)ADC_DRH<<8;
       0001CC AE 54 04         [ 2]  482 	ldw	x, #0x5404
       0001CF F6               [ 1]  483 	ld	a, (x)
       0001D0 5F               [ 1]  484 	clrw	x
@@ -491,40 +491,40 @@
       0001D7 58               [ 2]  491 	sllw	x
       0001D8 58               [ 2]  492 	sllw	x
       0001D9 58               [ 2]  493 	sllw	x
-      0001DA 17 03            [ 2]  494 	ldw	(0x03, sp), y
+      0001DA 17 05            [ 2]  494 	ldw	(0x05, sp), y
       0001DC 9F               [ 1]  495 	ld	a, xl
-      0001DD 1A 04            [ 1]  496 	or	a, (0x04, sp)
+      0001DD 1A 06            [ 1]  496 	or	a, (0x06, sp)
       0001DF 90 97            [ 1]  497 	ld	yl, a
       0001E1 9E               [ 1]  498 	ld	a, xh
-      0001E2 1A 03            [ 1]  499 	or	a, (0x03, sp)
+      0001E2 1A 05            [ 1]  499 	or	a, (0x05, sp)
       0001E4 90 95            [ 1]  500 	ld	yh, a
-                                    501 ;	ldr.c: 158: ADC_CR1 &= ~(1<<0); // ADC Stop Conversion
+                                    501 ;	ldr.c: 159: ADC_CR1 &= ~(1<<0); // ADC Stop Conversion
       0001E6 AE 54 01         [ 2]  502 	ldw	x, #0x5401
       0001E9 F6               [ 1]  503 	ld	a, (x)
       0001EA A4 FE            [ 1]  504 	and	a, #0xfe
       0001EC F7               [ 1]  505 	ld	(x), a
-                                    506 ;	ldr.c: 159: ampere &= 0x03ff; // 0 bits resolution so above 0x0400 is nothing
+                                    506 ;	ldr.c: 160: ampere &= 0x03ff; // 0 bits resolution so above 0x0400 is nothing
       0001ED 90 9E            [ 1]  507 	ld	a, yh
       0001EF A4 03            [ 1]  508 	and	a, #0x03
       0001F1 90 95            [ 1]  509 	ld	yh, a
-                                    510 ;	ldr.c: 162: PD_ODR |= (1<<4);
+                                    510 ;	ldr.c: 163: PD_ODR |= (1<<2);
       0001F3 AE 50 0F         [ 2]  511 	ldw	x, #0x500f
       0001F6 F6               [ 1]  512 	ld	a, (x)
-                                    513 ;	ldr.c: 160: if (ampere > 0xff) //lights are on
-      0001F7 90 A3 00 FF      [ 2]  514 	cpw	y, #0x00ff
+                                    513 ;	ldr.c: 161: if (ampere > 0x2ff) //lights are on
+      0001F7 90 A3 02 FF      [ 2]  514 	cpw	y, #0x02ff
       0001FB 2D 08            [ 1]  515 	jrsle	00105$
-                                    516 ;	ldr.c: 162: PD_ODR |= (1<<4);
-      0001FD AA 10            [ 1]  517 	or	a, #0x10
+                                    516 ;	ldr.c: 163: PD_ODR |= (1<<2);
+      0001FD AA 04            [ 1]  517 	or	a, #0x04
       0001FF AE 50 0F         [ 2]  518 	ldw	x, #0x500f
       000202 F7               [ 1]  519 	ld	(x), a
       000203 20 06            [ 2]  520 	jra	00106$
       000205                        521 00105$:
-                                    522 ;	ldr.c: 165: PD_ODR &= ~(1<<4);
-      000205 A4 EF            [ 1]  523 	and	a, #0xef
+                                    522 ;	ldr.c: 166: PD_ODR &= ~(1<<2);
+      000205 A4 FB            [ 1]  523 	and	a, #0xfb
       000207 AE 50 0F         [ 2]  524 	ldw	x, #0x500f
       00020A F7               [ 1]  525 	ld	(x), a
       00020B                        526 00106$:
-                                    527 ;	ldr.c: 167: delay(4000);
+                                    527 ;	ldr.c: 168: delay(4000);
       00020B 4B A0            [ 1]  528 	push	#0xa0
       00020D 4B 0F            [ 1]  529 	push	#0x0f
       00020F CDr00r52         [ 4]  530 	call	_delay

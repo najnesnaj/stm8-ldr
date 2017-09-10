@@ -4,7 +4,7 @@
    LDR on PD3
 
 
-   LED on PD4 (right on top)
+   LED on PD2 (right on top)
    */
 
 
@@ -136,11 +136,12 @@ int main () {
 	InitializeSystemClock();
 	InitializeUART();
 
-	//led on PD4
+	//led on PD2
 
-	PD_DDR |= (1<<4);
-	PD_CR1 |= (1<<4);
-	PD_CR2 |= (1<<4);
+	PD_DDR |= (1<<2);
+	PD_CR1 |= (1<<2);
+	PD_CR2 |= (1<<2);
+//			PD_ODR |= (1<<2);
 	while (1) {
 		//read analog value on port PD3  -- AIN4
 		gemiddeld=0;
@@ -157,12 +158,12 @@ int main () {
 
 		ADC_CR1 &= ~(1<<0); // ADC Stop Conversion
 		ampere &= 0x03ff; // 0 bits resolution so above 0x0400 is nothing
-		if (ampere > 0xff) //lights are on
+		if (ampere > 0x2ff) //lights are on
 		{
-			PD_ODR |= (1<<4);
+			PD_ODR |= (1<<2);
 		}
 		else
-			PD_ODR &= ~(1<<4);
+			PD_ODR &= ~(1<<2);
 
 		delay(4000);
 
